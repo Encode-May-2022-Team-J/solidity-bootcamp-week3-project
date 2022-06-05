@@ -27,14 +27,20 @@ async function main() {
   }
 
   console.log("Deploying TJToken contract");
-  const tokenContractFactory = new ethers.ContractFactory(
+  // const tokenContractFactory = new ethers.ContractFactory(
+  //   tokenJson.abi,
+  //   tokenJson.bytecode,
+  //   signer
+  // );
+
+  // const tokenContract = await tokenContractFactory.deploy();
+  // await tokenContract.deployed();
+
+  const tokenContract = new ethers.Contract(
+    "0x756aa13F4087224DB972AE31946435Da3AB65CbC",
     tokenJson.abi,
-    tokenJson.bytecode,
     signer
   );
-
-  const tokenContract = await tokenContractFactory.deploy();
-  await tokenContract.deployed();
 
   console.log(`TJToken address: ${tokenContract.address}`);
 
@@ -49,7 +55,6 @@ async function main() {
   await nftContract.deployed();
 
   console.log(`MyNFT address: ${nftContract.address}`);
-  console.log(`MyNFT address: 0xcb24ad83769E9a6Ed1B1BD96f51C729433B092ab`);
 
   console.log("Deploying Shop contract");
   const shopContractFactory = new ethers.ContractFactory(

@@ -30,4 +30,14 @@ contract MyNFT is ERC721, AccessControl, ERC721Burnable {
     {
         return super.supportsInterface(interfaceId);
     }
+
+    function _baseURI()
+        internal
+        view
+        virtual
+        override(ERC721)
+        returns (string memory)
+    {
+        return "http://127.0.0.1:3000/images/";
+    }
 }

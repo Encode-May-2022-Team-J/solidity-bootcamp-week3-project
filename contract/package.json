@@ -6,7 +6,8 @@
   "scripts": {
     "compile": "yarn run hardhat compile",
     "clean": "yarn run hardhat clean",
-    "deploy": "ts-node ./scripts/deploy.ts"
+    "deploy": "ts-node ./scripts/deploy.ts",
+    "test": "yarn run hardhat test"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.0",
