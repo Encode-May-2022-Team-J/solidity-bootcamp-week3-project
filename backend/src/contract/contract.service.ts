@@ -18,6 +18,7 @@ export class ContractService {
     private signerService: SignerService,
   ) {
     this.setupNFTContractInstances();
+    this.setupTokenContractInstances();
   }
 
   setupNFTContractInstances() {
@@ -51,7 +52,11 @@ export class ContractService {
   }
 
   async mintNFT(address: string, nftId: number) {
-    return this.nftContractSignedInstance.safeMint(address, nftId);
+    return await this.nftContractSignedInstance.safeMint(address, nftId);
+  }
+
+  async getNftUri(nftId: number) {
+    return this.nftContractPublicInstance.tokenURI(nftId);
   }
 
   async tokenBalanceOf(address: string) {
