@@ -51,10 +51,10 @@ const useStyles = createStyles((theme) => ({
 interface ImageCardProps {
   image: string;
   link: string;
-  title: string;
-  price: string;
-  author: string;
-  nftClass: string;
+  title?: string;
+  price?: string;
+  author?: string;
+  nftClass?: string;
 }
 
 export function ImageCard({
@@ -69,7 +69,6 @@ export function ImageCard({
 }: ImageCardProps & Omit<React.ComponentPropsWithoutRef<'div'>, keyof ImageCardProps>) {
   const { classes, cx } = useStyles();
   const theme = useMantineTheme();
-  const linkProps = { href: link, target: '_blank', rel: 'noopener noreferrer' };
   const navigate = useNavigate();
   return (
     <Card
@@ -84,27 +83,33 @@ export function ImageCard({
         </a>
       </Card.Section>
 
-      <Badge className={classes.rating} variant="gradient" gradient={{ from: 'purple', to: 'red' }}>
-        {nftClass}
-      </Badge>
-
+      {nftClass && (
+        <Badge
+          className={classes.rating}
+          variant="gradient"
+          gradient={{ from: 'purple', to: 'red' }}>
+          {nftClass}
+        </Badge>
+      )}
       <Group spacing="sm" position="apart" align="flex-start" className={classes.metadata} noWrap>
         <Stack spacing={theme.spacing.xs / 2}>
-          <Text size="sm" inline color="gray">
-            {author}
-          </Text>
-          <Text weight={500} component="a" {...linkProps}>
-            {title}
-          </Text>
+          {author && (
+            <Text size="sm" inline color="gray">
+              {author}
+            </Text>
+          )}
+          {title && <Text weight={500}>{title}</Text>}
         </Stack>
-        <Stack spacing={theme.spacing.xs / 2} align="flex-end" className={classes.price}>
-          <Text size="xs" inline color="gray">
-            Price
-          </Text>
-          <Text size="sm" weight={700} component="a" {...linkProps}>
-            {price}
-          </Text>
-        </Stack>
+        {price && (
+          <Stack spacing={theme.spacing.xs / 2} align="flex-end" className={classes.price}>
+            <Text size="xs" inline color="gray">
+              Price
+            </Text>
+            <Text size="sm" weight={700}>
+              {price}
+            </Text>
+          </Stack>
+        )}
       </Group>
     </Card>
   );

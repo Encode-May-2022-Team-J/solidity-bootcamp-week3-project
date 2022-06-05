@@ -9,43 +9,58 @@ import {
   useMantineTheme
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import HttpService from '../services/HttpService';
 
-const image = {
-  image:
-    'https://lh3.googleusercontent.com/GagPYFAxo_oKxr_3PfDComcpAbEb5CNPnA9FE2R8jmg2dSOUPWz0d3zUHsoIax9ElrRVi4B-MqoCTcQ1xOV5EFl9x_oZRxbvLxYq7A=s0',
-  title: 'Journey to Swiss Alps ',
-  description:
-    'Resident Evil Village is a direct sequel to 2017’s Resident Evil 7, but takes a very different direction to its predecessor, namely the fact that this time round instead of fighting against various mutated zombies, you’re now dealing with more occult enemies like werewolves and vampires.',
-  author: 'Bill Wormeater',
-  price: '1.20 ETH',
-  class: 'Rare'
-};
+interface Metadata {
+  name: string;
+  description: string;
+  author: string;
+  class: string;
+}
 
+interface NFT {
+  metadata: Metadata;
+}
 const NFTDetail = () => {
+  const params = useParams();
+  const [nft, setNft] = useState<NFT | null>(null);
+  useEffect(() => {
+    HttpService.get(`images/${params.id}`).then((res) => {
+      setNft(res);
+    });
+  }, []);
   const matches = useMediaQuery('(max-width: 992px)');
   const theme = useMantineTheme();
+  if (!nft) {
+    return null;
+  }
   return (
     <Grid gutter="xl">
       <Grid.Col xs={12} sm={6} md={5}>
         <AspectRatio ratio={1} mx="auto" style={{ borderRadius: '50px' }}>
-          <Image radius="md" src={image.image} alt={image.title} />
+          <Image
+            radius="md"
+            src={`${process.env.REACT_APP_API_ADDRESS}images/${params.id}/nft`}
+            alt={nft?.metadata?.name}
+          />
         </AspectRatio>
       </Grid.Col>
       <Grid.Col xs={12} sm={6} md={7}>
-        <Text mb={theme.spacing.xs / 2}>{image.author}</Text>
+        <Text mb={theme.spacing.xs / 2}>{nft?.metadata?.author}</Text>
         <Title order={1} mb={theme.spacing.xs}>
-          {image.title}
+          {nft?.metadata?.name}
         </Title>
-        <Badge size="lg">{image.class}</Badge>
+        <Badge size="lg">{nft?.metadata?.class}</Badge>
         <Text mt={32} mb={32}>
-          {image.description}
+          {nft?.metadata?.description}
         </Text>
         <Text size="sm" color="dimmed" weight={600}>
           Price
         </Text>
         <Title order={3} mb={16}>
-          {image.price}
+          1.20 ETH
         </Title>
         <Button fullWidth={matches} radius="md" size="lg">
           Buy now
