@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import App from './App';
 import './index.css';
+import Create from './pages/Create';
 import Explore from './pages/Explore';
 import NFTDetail from './pages/NFTDetail';
 import NotFound from './pages/NotFound';
@@ -16,6 +17,7 @@ root.render(
       <Routes>
         <Route path="/" element={<App />}>
           <Route path="/" element={<Explore />} />
+          <Route path="/create" element={<Create />} />
           <Route path="/assets/:id" element={<NFTDetail />} />
           <Route path="*" element={<NotFound />} />
         </Route>

@@ -1909,10 +1909,10 @@
     react-popper "^2.2.5"
     react-textarea-autosize "^8.3.2"
 
-"@mantine/dropzone@^4.2.7":
-  version "4.2.7"
-  resolved "https://registry.yarnpkg.com/@mantine/dropzone/-/dropzone-4.2.7.tgz#55bea42f4dfb4cb81f710fe3e9d1fdf7a0dedc30"
-  integrity sha512-eQTVX5hClHNYR6UzNa4P559LsbfdqNHJUu/P7TiIvwIHqKRVjDRkuSZMciSpWqBueBfzrdCZQ32exb3l299Xfg==
+"@mantine/dropzone@^4.2.8":
+  version "4.2.8"
+  resolved "https://registry.yarnpkg.com/@mantine/dropzone/-/dropzone-4.2.8.tgz#b8783d34dfe15ac4cb159a2e24a43ce88f7d7945"
+  integrity sha512-valgayTMesZE0VkQBTr3w6UVNKmWL48g3R3onivx37AGLN+Z2cPpn8C77wOH3T94+cdRhBJGv3l450sxgN4aog==
   dependencies:
     react-dropzone "^11.4.2"
 

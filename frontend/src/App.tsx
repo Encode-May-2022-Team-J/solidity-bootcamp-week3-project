@@ -9,7 +9,7 @@ const links = [
     label: 'Explore'
   },
   {
-    link: '/pricing',
+    link: '/create',
     label: 'Create'
   }
 ];
